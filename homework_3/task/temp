@@ -1,0 +1,56 @@
+
+// function maxNumberString(number,factorialNumberInString){
+//     debugger;
+//     var factorialNumber = factorialNumberInString(number);
+//     var maxNumber = "2";
+//     var numberString = "2";
+//     var tttt = 1;
+//     while (factorialNumberInString(maxNumber) !== factorialNumber){
+//         tttt++;
+//         if (tttt > 10000000) break;
+//         if (numberString === "2" && factorialNumberInString(maxNumber) < factorialNumber){
+//             maxNumber+=numberString;
+//
+//         } else if (factorialNumberInString(maxNumber) > factorialNumber)
+//             {
+//              maxNumber = delLastSymblString(maxNumber);
+//              numberString = String(Number( numberString)+1);
+//             }
+//             for (var i = 0; i<maxNumber.length;i++){
+//              if( Number(maxNumber.charAt(i)) === Number(numberString)-1) {
+//                  maxNumber = maxNumber.substr(0, i) + numberString + maxNumber.substr(i+1);
+//                  while (factorialNumberInString(maxNumber) > factorialNumber) maxNumber = delLastSymblString(maxNumber);
+//                  var tick = true;
+//                  for (var s = 0; s<maxNumber.length-1;s++){
+//                     if  (maxNumber.charAt(s) !== maxNumber.charAt(s+1)) tick = false;
+//                  }
+//                  if (tick)
+//                  {
+//                      numberString = String(Number(numberString) + 1);
+//                      maxNumber = maxNumber.substr(0, 1) + numberString + maxNumber.substr(2);
+//                  }
+//                  i = maxNumber.length;
+//              }
+//         }
+//     }
+//     return maxNumber;
+// }
+// если все цыфри одиннаковые и больше числа факториала мы удаляем
+// если мы удалили проверить все ли цыфры одинниковые
+
+
+// console.log (maxNumberString('1234',factorialNumberInString));
+// console.log (maxNumberString('55',factorialNumberInString));
+
+
+       //if (checkString(str,n) && str.charAt(i) === n && factorialNumberInString(str) < factorialNumber){
+
+
+        //} else if (factorialNumberInString(str) < factorialNumber && !checkString(str, n) && str.charAt(i) === n){
+        //    str = str.replace(str.charAt(i), Number(n) + 1);
+        //    if (factorialNumberInString(str) > factorialNumber) {
+        // str = delLastSymblString(str);
+        //    }
+
+
+

@@ -24,16 +24,16 @@
  * There should be no zeroes and ones in this number decimal representation.
  */
 
-// var drazilTest = [
-//     {
-//         parameters: ["1234"],
-//         expectedResult: 33222
-//     },
-//     {
-//         parameters: ["555"],
-//         expectedResult: 555
-//     }
-// ];
+var drazilTest = [
+    {
+        parameters: ["1234"],
+        expectedResult: 33222
+    },
+    {
+        parameters: ["555"],
+        expectedResult: 555
+    }
+];
 
 
 /**
@@ -43,69 +43,63 @@
 // console.log(drazil(boys));
 
 
-function drazil(boys, girls) {
-//TODO
-}
-
-var number;
+var number = prompt('Enter number. Length of number must be less than 15 but more than 0 ',0);
 while (number.length > 15 || number.length === 0 || isNaN(number) || parseInt(number, 10) === 0){
     number = prompt('Enter number. Length of number must be less than 15 but more than 0 ',0);
 }
+
 number = parseInt(number, 10);
 number = String(number);
-console.log(factorialNumberInString(number));
 
 
+var factorialNumber = factorialNumberInString(number);
+console.log(drazil(number));
 
-//Не работает. Нужно переписать.
+function drazil(number) {
+    var maxNumber = "2";
+    var numberString = "2";
+    factorialNumber = factorialNumberInString(number);
+    while (factorialNumberInString(maxNumber) < factorialNumber){
+        maxNumber+=numberString;
+    }
+    return Number(changeSymbol(maxNumber,numberString));
+}
 
-// function maxNumberString(number,factorialNumberInString){
-//     debugger;
-//     var factorialNumber = factorialNumberInString(number);
-//     var maxNumber = "2";
-//     var numberString = "2";
-//     var tttt = 1;
-//     while (factorialNumberInString(maxNumber) !== factorialNumber){
-//         tttt++;
-//         if (tttt > 10000000) break;
-//         if (numberString === "2" && factorialNumberInString(maxNumber) < factorialNumber){
-//             maxNumber+=numberString;
+
 //
-//         } else if (factorialNumberInString(maxNumber) > factorialNumber)
-//             {
-//              maxNumber = delLastSimblString(maxNumber);
-//              numberString = String(Number( numberString)+1);
-//             }
-//             for (var i = 0; i<maxNumber.length;i++){
-//              if( Number(maxNumber.charAt(i)) === Number(numberString)-1) {
-//                  maxNumber = maxNumber.substr(0, i) + numberString + maxNumber.substr(i+1);
-//                  while (factorialNumberInString(maxNumber) > factorialNumber) maxNumber = delLastSimblString(maxNumber);
-//                  var tick = true;
-//                  for (var s = 0; s<maxNumber.length-1;s++){
-//                     if  (maxNumber.charAt(s) !== maxNumber.charAt(s+1)) tick = false;
-//                  }
-//                  if (tick)
-//                  {
-//                      numberString = String(Number(numberString) + 1);
-//                      maxNumber = maxNumber.substr(0, 1) + numberString + maxNumber.substr(2);
-//                  }
-//                  i = maxNumber.length;
-//              }
-//         }
-//     }
-//     return maxNumber;
-// }
+function changeSymbol(str,n) {
+    for (var i = 0; i < str.length; i++) {
+        str = str.replace(str.charAt(i), Number(n) + 1);
+        while (factorialNumberInString(str) > factorialNumber) {
+            str = delLastSymblString(str);
+        }
+        if (factorialNumberInString(str) === factorialNumber) return str;
+        if(checkString(str,String(Number(n)+1))) {
+          n=String(Number(n)+1);
+          str = changeSymbol(str,n);
+          if (factorialNumberInString(str) === factorialNumber) return str;
+        }
+
+    }
+}
 
 
+//the function checks whether all characters in the string are the same and equal to the given character
+function checkString (str, n) {
+    for (var i = 0; i<str.length; i++){
+        if (str.charAt(i) !== n){
+            return false;
+        }
+    } return true;
+}
 
-// console.log (maxNumberString('1234',factorialNumberInString));
-// console.log (maxNumberString('55',factorialNumberInString));
-
-
-function delLastSimblString(str) {
+//The function deletes the last character in the string.
+function delLastSymblString(str) {
     return str.slice(0,str.length-1);
 }
 
+
+//the function finds the factorial of each number in the string and multiplies all values
 function factorialNumberInString(string) {
     var result;
     for (var i = 0; i<string.length; i++){
@@ -115,6 +109,9 @@ function factorialNumberInString(string) {
     return result;
 }
 
+
+
+// the function finds the factorial of a number
 function factorial(number){
     return (number !== 1)? number * factorial(number - 1):1;
 }
