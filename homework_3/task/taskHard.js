@@ -43,10 +43,15 @@ var drazilTest = [
 // console.log(drazil(boys));
 
 
-var number = prompt('Enter number. Length of number must be less than 15 but more than 0 ',0);
-while (number.length > 15 || number.length === 0 || isNaN(number) || parseInt(number, 10) === 0){
-    number = prompt('Enter number. Length of number must be less than 15 but more than 0 ',0);
-}
+
+
+// var number = prompt('Enter number. Length of number must be less than 15 but more than 0 ',0);
+
+// while (number.length > 15 || number.length === 0 || isNaN(number) || parseInt(number, 10) === 0){
+//     number = prompt('Enter number. Length of number must be less than 15 but more than 0 ',0);
+// }
+
+
 
 number = parseInt(number, 10);
 number = String(number);

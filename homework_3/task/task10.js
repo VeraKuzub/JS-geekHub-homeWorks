@@ -42,40 +42,33 @@ var capsLockTests = [
     }
 ];
 
-// первая буква строчная, все остальные прописные
-var regExp1 = /^([A-Z])([a-z]+)$/;
-// console.log(regExp1.test("Aaaa"));
 
-//  только прописныe буквы
-var regExp2= /^([A-Z]+[A-Z]+)$/;
-// console.log(regExp2.test('VVRR'));
+// только прописныe буквы
+var regExp1= /^([A-Z]*[A-Z])$/;
 
 
-// первая буква прописная, потом строчные. В конце может быть строчная или строчная и знак ?
-var regExp3 = /^([a-z])([A-Z]+)|([A-Z][\\?])$/;
-// console.log(regExp3.test("cAPS"));
 
-// первая буква строчная, потом могут быть и строчные и прописные, в конце строчная или строчная и знак !.
-var regExp4 =/^([a-z])[a-zA-Z]+([a-z]+)|([a-z]+[\!])$/;
-// console.log(regExp4.test("aDFDFDFa"));
+// первая буква строчная, потом прописные. В конце может быть прописные или знак '?'
+var regExp2 = /^([a-z][A-Z]*)([A-Z]|[//?])$/;
 
-// первая буква прописная, потом могут быть и строчные и прописные, в конце прописная
-var regExp6 =/^([A-Z])[a-zA-Z]+([A-Z]+)$/;
-// console.log(regExp6.test("AdfdAdfdDFDFsA"));
+
+
 
 function capsLock(str) {
  //сделала массив из строки, разделение пробел (/\s+/)
     var strArr = str.split(/\s+/);
         for (var i = 0; i<strArr.length;i++){
-            if(regExp2.test(strArr[i]) || regExp4.test(strArr[i])){
+            if(regExp1.test(strArr[i])){
+                console.log('regExp1',strArr[i]);
                 strArr[i] = strArr[i].toLowerCase();
-            } else if(regExp3.test(strArr[i]) || regExp6.test(strArr[i])) {
+            } else if(regExp2.test(strArr[i])) {
+                console.log('regExp2',strArr[i]);
                 strArr[i] = strArr[i].toLowerCase();
                 var character = strArr[i].charAt(0).toUpperCase();
                 strArr[i] = character + strArr[i].substring(1);
             }
         }
-    // console.log("strArr.join(' ')",strArr.join(' '));
+    console.log("strArr.join(' ')",strArr.join(' '));
     return strArr.join(' ');
 }
 
