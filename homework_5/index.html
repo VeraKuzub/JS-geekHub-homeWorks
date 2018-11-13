@@ -1,0 +1,25 @@
+<!--Створити додаток Todo list з можливістю додавання, видалення елементів.
+В кожному елементі, крім тексту, вивести час його створення.
+Додати кнопку Reverse для перестановки списку в зворотньому порядку.-->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Todo list</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+	<h1 class="h1">Todo List</h1>
+	<input type="text" name="listTodo" placeholder="Enter what you need to do" class="input" id ="userInput">
+	<button type="button" name="btnEnter" class="btn" id="btnEnter">Add to Todo list</button>
+	<ol class="listItems" id="orderList">
+	</ol>
+	<button type="button" name="btnReverse" class="btn" id="btnReverse"> Reverse Todo list</button>
+	</div>
+
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+body {
+	width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+.container, .input, .btn {
+	box-sizing: border-box;
+}
+
+.container {
+	width: 50%;
+    margin: auto;
+    border: 2px solid #224C00;
+    background: #609732;
+}
+
+
+ .input, .btn, .h1 {
+ 	font-family: Georgia, 'Times New Roman', Times, serif;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.h1 {
+	text-align: center;
+	text-transform: uppercase;
+	font-style: italic;
+	font-size: 20px;
+	font-weight: 600;
+
+}
+
+.input {
+	width: 100%;
+	border: 1px solid #B9E397;
+	padding: 10px;
+	margin: 0;
+	background: #B9E397;
+	outline: none;
+}
+
+
+.input:active , .input:focus {
+	background: #adff2f;
+	border: 1px solid #456612;
+	outline: none;
+}
+
+.btn {
+	display: inline-block; 
+	text-align: center; 
+	box-shadow: none;
+	padding: 10px; 
+	text-transform: uppercase;
+	font-weight: 600;
+	outline: none;
+}
+
+.btnDelete {
+	float: right;
+	width: 25%;
+	margin: 3px;
+	font-size: 16px;
+	border: 1px solid #456612;
+	background: #67991c;
+}
+
+
+#btnEnter, #btnReverse {
+	width: 100%;
+	background-color: #224C00; 
+	border: 1px solid #224C00; 
+	color: #ffffff; 
+}
+
+#btnEnter:hover , #btnReverse:hover, .btnDelete:hover{
+background: #277554; 
+}
+
+
+
+.listItems {
+	padding: 10px 0;
+	margin: 10px;
+	overflow: hidden;
+}
+
+.item {
+    display: list-item;
+    float: left;
+    width: 60%;
+    margin: 5px 5px 5px 15px;
+    padding: 10px;
+}
