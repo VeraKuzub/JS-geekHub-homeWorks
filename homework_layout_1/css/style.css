@@ -1,0 +1,196 @@
+body {
+	font:1.49vw/1.5em 'Montserrat', Arial, sans-serif;
+	color: #ffffff;
+}
+
+
+.container {
+	width: 100%;
+	margin: 0 auto;	
+}
+
+p, 
+h1 {
+	padding: 2vw 3vw;
+}
+
+h1 {
+	line-height: 1.2;
+	margin: 0;
+}
+
+.row-bg-img {
+	background:
+	url(../images/Rectangle_1_copy_3.png) right no-repeat,
+	url(../images/Background.jpg) center no-repeat;
+	background-size: 66.6% auto, cover;
+}
+
+
+.row30 {
+	height: 18.5em;
+ 	margin: -3em -16.6em;
+}
+
+.col-1,
+.col-3,
+.col-4,
+.col-8 {
+	display: inline-block;
+}
+
+.col-1 {
+	width: 8.4%;
+
+}
+.col-3 {
+	width: 25%;
+}
+.col-4 {
+	width: 33.4%; 
+}
+
+.col-8 {
+	width: 66.6%;
+}
+
+.headLogo,
+.header p,
+h1,
+.largeText,
+.ourTeam {
+	text-transform: uppercase;
+}
+
+.headLogo,
+.header p {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+
+.headLogo {
+	font-size: 7.3vw;
+}
+.header p {
+    font-size: 2vw;
+    padding: 0 0 2em;
+}
+
+ .h1 {
+    font-size: 2.81vw;
+    color: #eecb56;
+    text-align: right;
+    padding: 0;
+}
+
+.paddingTop5 {
+	padding-top: 5em;
+    height: 100%;
+}
+
+.paddingTop10 {
+	padding-top: 10.9em;
+}
+
+.largeText {
+	font-size: 7.3vw;
+	margin: 0;
+}
+
+.mediumText {
+	font-size: 4vw;
+}
+
+.bg-orange {
+	background:rgba(240,197,48,0.9);
+}
+
+.bg-grey {
+	background: #363a43;
+}
+
+.color-grey {
+	color: #363a43;
+}
+
+.color-orange {
+	color:#eecb56;
+}
+
+
+
+
+.Regular {
+	font-weight: 400;
+}
+.Bold {
+	font-weight: 700;
+}
+
+.ExtraBold {
+	font-weight: 800;
+}
+
+.Light {
+	font-weight: 300;
+}
+
+.SemiBold {
+	font-weight: 600;
+}
+
+.right {
+	text-align: right;
+}
+
+
+
+.ourTeam {
+	font-size: 2.50vw;
+	line-height: 1.2;
+
+}
+.footer-p {
+	font-size: 1.8vw;
+}
+
+footer {
+	overflow: hidden;
+	background: url(../images/Rectangle_1_copy_3.png) right no-repeat,
+	#363a43;
+	background-size: 66.6% auto;
+}
+
+
+
+/*-- img --*/
+
+img {
+	width: 12.83%;
+}
+
+.rectangle_8{
+	margin-left: 15%;
+}
+
+.rectangle,
+.rectangle-1 {
+	float: right;
+}
+
+.rectangle {
+	width: 10%;
+}
+
+.img-logo {
+	width: 70%;
+	margin-left: 15%;
+    margin-top: 4%;
+}
+
+.rectangle-1 {
+	width: 40%;
+	height: 1.3%;
+}
+
