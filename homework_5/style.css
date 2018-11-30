@@ -3,6 +3,9 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 
@@ -12,17 +15,10 @@ body {
 
 .container {
     width: 100%;
-    margin: auto;
     border: 2px solid #224C00;
     background: #609732;
 }
 
-
- .input, .btn, .h1 {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 16px;
-    font-weight: 400;
-}
 
 .h1 {
     text-align: center;
@@ -37,7 +33,6 @@ body {
     width: 100%;
     border: 1px solid #B9E397;
     padding: 10px;
-    margin: 0;
     background: #B9E397;
     outline: none;
 }
@@ -50,8 +45,6 @@ body {
 }
 
 .btn {
-    display: inline-block; 
-    text-align: center; 
     box-shadow: none;
     padding: 10px; 
     text-transform: uppercase;
@@ -63,20 +56,19 @@ body {
     float: right;
     width: 25%;
     margin: 3px;
-    font-size: 16px;
     border: 1px solid #456612;
     background: #67991c;
 }
 
 
-#btnEnter, #btnReverse {
+.btnEnter, .btnReverse {
     width: 100%;
     background-color: #224C00; 
     border: 1px solid #224C00; 
     color: #ffffff; 
 }
 
-#btnEnter:hover , #btnReverse:hover, .btnDelete:hover{
+.btnEnter:hover , .btnReverse:hover, .btnDelete:hover{
 background: #277554; 
 }
 
@@ -88,10 +80,27 @@ background: #277554;
     overflow: hidden;
 }
 
-.item {
-    display: list-item;
-    float: left;
-    width: 60%;
-    margin: 5px 5px 5px 15px;
-    padding: 10px;
+
+.listItem {   
+    background: #609732;
+    border: none;
+    width: 65%;
+    padding-left: 2rem;
+    outline: none;
+}
+
+.listItem:focus {
+    background: #B9E397;
+    border: 1px solid #B9E397;
+}
+
+.box {
+    position: relative;
+    margin-top: 1rem;
+    padding: 0;
+    display: inline-block;
+}
+
+.flex {
+    display: flex;
 }
