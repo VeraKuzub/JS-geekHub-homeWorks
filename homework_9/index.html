@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            width: 50%;
+            padding: 0;
+            margin: 0 auto;
+            font-family: sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: #add8e6;
+
+        }
+        .input-form {
+            padding: 10px;
+            background: white;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+        input {
+            -webkit-appearance: none;
+            border-radius: 20px;
+            padding: 7px 12px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+        div {
+            padding-left: 20px;
+            color: #4248e6;
+        }
+    </style>
+</head>
+
+<body>
+<h1>What weather in you city?</h1>
+<form class="input-form" id="form_address">
+    <input type="text" class="input-text" id="text_address" placeholder="Enter the city" name="city">
+    <input type="submit" class="input-btn" id="btn_address" value="Search">
+</form>
+
+<div id="weather" style="min-height: 100vh;"></div>
+
+
+<script>
+    document.getElementById("form_address").addEventListener("submit", getWeather);
+    function getWeather(e) {
+        e.preventDefault();
+        var addressString = document.getElementById('text_address').value;
+
+        if (addressString.length) {
+            var xhrString = "https://api.openweathermap.org/data/2.5/weather?q="+encodeURIComponent(addressString)+"&APPID=fbaf08e1483cbf1145873dc43a03ebc4";
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', xhrString, true);
+            xhr.onreadystatechange = function() {
+                 	if (xhr.readyState === 4) {
+                 	    var receivedData = JSON.parse(xhr.responseText);
+                        console.log(receivedData);
+                        drawWeather(receivedData);
+                        document.getElementById('text_address').value = " ";
+                 	} else {
+                        document.body.querySelector('#weather').innerHTML = "City is not found. Enter the correct city name";
+                    }
+                 };
+
+            xhr.send();
+        }
+        }
+
+        function drawWeather(obj) {
+        var date = new Date();
+        document.body.querySelector('#weather').innerHTML =
+            "Weather in " + obj.name + "<br>"
+             +  date + "<br>"
+            // + date.getDate() +"."+ date.getMonth() +"."+date.getFullYear()+ "<br>"
+            +(obj.main.temp-273.15).toFixed(2) + "°С "
+            + obj.weather[0].description + "<br>"
+            +"temperature from "+(obj.main.temp_min-273.15).toFixed(0) + "°С to "
+            +(obj.main.temp_max-273.15).toFixed(0) + "°С<br>"
+            +"wind:" + obj.wind.speed + "m/s <br>"
+            +"clouds: " + obj.clouds.all + "%<br>"
+        }
+
+</script>
+
+</body>
+</html>
