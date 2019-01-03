@@ -1,0 +1,85 @@
+<!-- Каталог FREE API: https://market.mashape.com/explore?sort=developers. выберите любые два из них и взаимодействовать с ними (отправка и обработка данных). Один realízovuêmo с помощью xmlhttprequest доступен, другой - метод jquery. Ajax. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>XMLHttpRequest</title>
+	<style type="text/css">
+		body {
+            width: 50%;
+            padding: 0;
+            margin: 0 auto;
+            font-family: sans-serif;
+        }
+        h1 {
+            text-align: center;
+            color: #add8e6;
+            border-bottom: 1px solid #add8e6;
+        }
+        .input-form {
+            padding: 10px;
+            background: white;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+        input {
+            -webkit-appearance: none;
+            border-radius: 20px;
+            padding: 7px 12px;
+            margin: 7px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+        div {
+            padding-left: 20px;
+            padding-top: 20px;
+            color: #4248e6;
+        }
+       </style>
+</head>
+<body>
+<h1>XMLHttpRequest</h1>
+<form class="input-form" id="form_XMLHttpRequest">
+    <input type="text" id="fname" placeholder="Enter first name" name="fname">
+     <input type="text" id="sname" placeholder="Enter second name " name="sname"><br>
+    <input type="submit" value="Search">
+</form>
+
+<div id="result_XMLHttpRequest" style="min-height: 10vh;"></div>
+
+
+<script>
+document.getElementById("form_XMLHttpRequest").addEventListener("submit", requestPercentage);
+    function requestPercentage(e) {
+        e.preventDefault();
+        var firstPartner = document.getElementById('fname').value;
+         var secondPartner = document.getElementById('sname').value;
+
+        if (firstPartner.length &&  secondPartner.length ) {
+            var xhrString = `https://love-calculator.p.mashape.com/getPercentage?fname=${firstPartner}&sname=${secondPartner}`;
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', xhrString, true);
+            xhr.setRequestHeader("X-Mashape-Key", "lbNyAdd2kfmshsDaEVNGuJz6GIVyp1jDDWdjsnb3ttbITYSjjc");
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.onreadystatechange = function() {
+                 	if (xhr.readyState === 4) {
+                 		console.log(xhr.responseText);
+                 	    var receivedData = JSON.parse(xhr.responseText);
+                        drawResult(receivedData);
+                        document.getElementById('fname').value = " ";
+                        document.getElementById('sname').value = " ";
+                 	} else {
+                 		document.body.querySelector('#result_XMLHttpRequest').innerHTML = "Something went wrong. Try once more";
+                    }
+                 };
+
+            xhr.send();
+        }
+    }
+
+        function drawResult(obj) {
+        document.body.querySelector('#result_XMLHttpRequest').innerHTML = obj.fname +" and "+ obj.sname + " compatibility is: " + obj.percentage + "% <br>"+ obj.result;
+        }
+    </script>
+</body>
+</html>

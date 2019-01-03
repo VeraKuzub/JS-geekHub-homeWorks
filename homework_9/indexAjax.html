@@ -1,0 +1,105 @@
+<!-- Каталог FREE API: https://market.mashape.com/explore?sort=developers. выберите любые два из них и взаимодействовать с ними (отправка и обработка данных). Один realízovuêmo с помощью xmlhttprequest доступен, другой - метод jquery. Ajax. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Ajax Request</title>
+	<style type="text/css">
+		body {
+            width: 50%;
+            padding: 0;
+            margin: 0 auto;
+            font-family: sans-serif;
+        }
+        h1 {
+            color: #add8e6;
+            border-bottom: 1px solid #add8e6;
+        }
+        h1, h2, p {
+            text-align: center;
+        }
+        .input-form {
+            padding: 10px;
+            background: white;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+        input {
+            -webkit-appearance: none;
+            border-radius: 20px;
+            padding: 7px 12px;
+            margin: 7px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+        div {
+            text-align: center;
+        }
+       </style>
+       <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+</head>
+<body>
+<h1> Ajax Request</h1>
+<h2> Robohash Image Generator</h2>
+<p>Generate a random and cool looking robot image for your text</p>
+<form class="input-form" id="form">
+    <input type="text" id="textForRoboGenerate" placeholder="Enter text" name="text"><br>
+    <input type="submit" value="Search">
+</form>
+
+<div></div>
+
+
+<script>
+document.getElementById("form").addEventListener("submit", requestRoboImage);
+    function requestRoboImage(e) {
+        e.preventDefault();
+       let someText = document.getElementById('textForRoboGenerate').value;
+        if (someText.length > 0) {
+            var xhrString = `https://robohash.p.mashape.com/index.php?text=${someText}`;
+
+            //-----------XMLHttpRequest-------------------
+            // var xhr = new XMLHttpRequest();
+            // xhr.open('GET', xhrString, true);
+            // xhr.setRequestHeader("X-Mashape-Key", "lbNyAdd2kfmshsDaEVNGuJz6GIVyp1jDDWdjsnb3ttbITYSjjc");
+            // xhr.setRequestHeader("Accept", "application/json");
+            // xhr.onreadystatechange = function() {
+            // 		console.log(xhr.readyState);
+            //      	if (xhr.readyState === 4) {
+            //      	    var receivedData = JSON.parse(xhr.responseText);
+            //             drawResult(receivedData);
+            //             // console.log(receivedData);
+            //             document.getElementById('textForRoboGenerate').value = "";
+            //      	} else {
+            //             document.body.querySelector('div').innerHTML = "Something went wrong. Try once more";
+            //         }
+            //      };
+
+            // xhr.send();
+
+            //    ---------------jQuery-------------------
+			$.ajax({
+				url : xhrString,
+				method: 'GET',
+				headers: {
+			       'X-Mashape-Key': 'lbNyAdd2kfmshsDaEVNGuJz6GIVyp1jDDWdjsnb3ttbITYSjjc',
+			       'Accept': 'application/json'
+			    },
+				success: function(data){
+					let receivedData = JSON.parse(data);
+					// console.log(receivedData);
+     				drawResult(receivedData);
+     				document.getElementById('textForRoboGenerate').value = "";
+				}
+			});
+        }
+    }
+
+    function drawResult(obj) {
+    	document.body.querySelector('div').innerHTML = `<img id="resultImg"  src=${obj.imageUrl} alt="RobotImage">`;
+    }
+    </script>
+</body>
+</html>
