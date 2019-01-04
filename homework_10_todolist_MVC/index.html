@@ -1,0 +1,28 @@
+<!--Переписати Todolist з використанням MVC. Повинно бути: Drag&drop, зберігання в localstorage, кнопка reverse для сортування списка в зворотному порядку.-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Todo list MVC</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<h1 class="h1">Todo List</h1>
+		<input class="input" id ="js_userInput" type="text" name="listTodo" placeholder="Enter what you need to do"  >
+		<button class="btn btnEnter" id="js_btnEnter" type="button" name="btnEnter" >Add to Todo list</button>
+
+		<ol class="listItems" id="js_myListItems">
+		</ol>
+
+		<button class="btn btnReverse" id="js_btnReverse" type="button" name="btnReverse" > Reverse Todo list</button>
+	</div>
+
+<script src="taskView.js"></script>
+<script src="taskModel.js"></script>
+<script src="taskController.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
