@@ -1,0 +1,39 @@
+body {
+    width: 50%;
+    margin: 0 auto;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #070219b5;
+}
+
+h1,h2 {
+	font-size: 18px;
+	text-align: center;
+	color: #0b081785;
+}
+
+a {
+	text-decoration: none;
+}
+.imgStyle {
+    width: 40%;
+    border: 2px solid #0b081785;
+    border-radius: 50%; 
+}
+
+#containerForImg {
+    text-align: center;
+    font-style: italic;
+    font-weight: 600;
+}
+
+#myRepositories {
+	text-transform: 
+}
+
+#adress {
+	text-align: center;
+}
+
