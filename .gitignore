@@ -1,3 +1,4 @@
 # PHPStorm
 */.idea
 *.idea
+node_modules
