@@ -1,0 +1,9 @@
+{
+"images": 
+	[
+		{"index": 0, "alt":"Cat", "picture": "img/1.jpg", "name": "Cat"},
+		{"index": 1, "alt":"Dragon", "picture": "img/2.jpg", "name": "Dragon"},
+		{"index": 2, "alt":"Big dragon", "picture": "img/3.jpg", "name": "Big dragon"},
+		{"index": 3, "alt":"Hourse", "picture": "img/4.jpg", "name": "Hourse" }
+	]
+}
