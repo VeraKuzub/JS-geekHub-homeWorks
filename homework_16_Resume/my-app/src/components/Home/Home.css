@@ -1,0 +1,15 @@
+.homeContainer {
+	text-align: center;
+}
+
+.homeContainer p {
+	margin-top: 20%;  
+	font-weight: 600;
+	font-size: 3rem;
+	padding: 20px;
+}
+
+.homeContainer img {
+	width: 40px;
+
+}

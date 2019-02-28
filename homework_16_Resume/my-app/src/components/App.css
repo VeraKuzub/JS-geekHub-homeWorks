@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+h1, h2 {
+	text-align: center;
+}
+
+
+a {
+  margin-left:1rem;
+  color: #CECECE;
+  text-decoration: none;
+}
+
+.center {
+	text-align: center;
+}
+
+.App {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.Header-nav {
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 2rem;
+  text-align: right;
+  font-family: cursive;
+}
+
+
+
+.Main {
+text-align: left;
+color:  #D9D9D9;
+font-size: 2rem;
+font-style: italic;
+}
+
+
+
+

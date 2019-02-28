@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], input[type=email], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+textarea {
+  min-height: 170px;
+}
+
+input[type=submit] {
+  width: 100%;
+  font-size: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+
+.contactContainer {
+  text-align: center;
+  padding: 10px;
+}
+
+.column {
+  width: 50%;
+  margin-top: 6px;
+  margin-right: auto;
+  margin-left: auto; 
+  padding: 20px;
+  text-align: left;
+}
