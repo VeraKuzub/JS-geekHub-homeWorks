@@ -4,6 +4,11 @@
 // 2. Обов’язково там має бути розділ Мої репозиторії GitHub. 
 // 3. По кліку на репозиторій розкривається додаткова інформація про дату останнього коміта в master
 
+
+// 4. Прикрутити ServiceWorkers до свого портфоліо на gitpages (кешування, можливість перегляду офлайн). 
+
+//-------------------------------
+
 let repositoriesList = document.body.querySelector('#myRepositories');
 let containerImg = document.body.querySelector('#containerForImg');
 let user = 'VeraKuzub';
@@ -21,7 +26,9 @@ function addMyImage (obj) {
 	let image = document.createElement('img');
 	image.setAttribute('alt','Vera Kuzub');
 	image.setAttribute('class','imgStyle'); 
-	image.setAttribute('src', obj.avatar_url); 
+	//image.setAttribute('src', obj.avatar_url); 
+	image.setAttribute('src', './vera.jpeg'); //for service workers
+
 	document.body.querySelector('#containerForImg').appendChild(image);
 }
 
@@ -113,14 +120,15 @@ document.body.querySelector('#myRepositories').addEventListener('click', functio
 
 
 
-
-
-
-
-	
-	
-
-
-
-
-
+// -------------------serviceWorker-------------------
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/serviceWorker.js', {scope: './'})
+  .then(function(registration) {
+    // registration worked
+    console.log('Registration succeeded. Scope is ' + registration.scope);
+    console.dir(registration);
+  }).catch(function(error) {
+    // registration failed
+    console.log('Registration failed with ' + error);
+  });
+}
