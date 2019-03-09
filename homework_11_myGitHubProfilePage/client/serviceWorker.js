@@ -50,7 +50,8 @@ self.addEventListener('fetch', function(event) {
 				return response;
 			}
 
-			var fetchRequest = event.request.clone();
+			
+			var fetchRequest = event.request;
 
 			return fetch(fetchRequest)
 			.then(function(response){

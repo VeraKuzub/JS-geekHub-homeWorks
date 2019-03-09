@@ -26,8 +26,7 @@ function addMyImage (obj) {
 	let image = document.createElement('img');
 	image.setAttribute('alt','Vera Kuzub');
 	image.setAttribute('class','imgStyle'); 
-	//image.setAttribute('src', obj.avatar_url); 
-	image.setAttribute('src', './vera.jpeg'); //for service workers
+	image.src = obj.avatar_url; 
 
 	document.body.querySelector('#containerForImg').appendChild(image);
 }
