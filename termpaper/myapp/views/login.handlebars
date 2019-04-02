@@ -1,0 +1,15 @@
+<div class="container">
+	<h1 id="login" class="text-center">Логин</h1>
+	<p id = "containerPrompt" class="alert alert-danger"></p>
+    <form id="signUpForm" action="/users/login" method="post"> 
+       <div class="form-group">
+            <label for="userLogin">Логин</label>
+            <input id="userLogin" class="form-control" name="userLogin"  type="text" placeholder="Введите имя пользователя" required>
+        </div>
+        <div class="form-group">
+            <label for="userPassword">Пароль</label>
+            <input id="userPassword" class="form-control" name= "userPassword" type="password" placeholder="Введите пароль"  required>
+        </div>  
+      <button id="doLogin" class="btn btn-outline-success" type="submit">Войти</button>
+    </form>
+</div>
