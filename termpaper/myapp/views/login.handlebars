@@ -1,7 +1,7 @@
 <div class="container">
-	<h1 id="login" class="text-center">Логин</h1>
 	<p id = "containerPrompt" class="alert alert-danger"></p>
-    <form id="signUpForm" action="/users/login" method="post"> 
+	<h1 id="login" class="text-center">Логин</h1>
+    <form id="loginForm" action="/users/login" method="post"> 
        <div class="form-group">
             <label for="userLogin">Логин</label>
             <input id="userLogin" class="form-control" name="userLogin"  type="text" placeholder="Введите имя пользователя" required>
@@ -13,3 +13,5 @@
       <button id="doLogin" class="btn btn-outline-success" type="submit">Войти</button>
     </form>
 </div>
+
+<script type="text/javascript" src="../js/login.js"></script>
