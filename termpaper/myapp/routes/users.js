@@ -55,6 +55,15 @@ function findUserFromDB (obj) {
     });
   });
 }
+
+function ensureAuthenticated(req, res, next){
+	if (req.isAuthenticated()){
+		return next();
+	} else {
+		req.flash('error_msg', 'Нужно залогиниться');
+		res.redirect('/users/login');
+	}
+}
 //---------------------------------------------------------------------------
 const express = require('express');
 const router = express.Router();
@@ -69,8 +78,11 @@ const { sanitizeBody } = require('express-validator/filter');
 const User = require('../models/user');
 
 //profile page
-router.get('/profile', function(req, res){
-	res.render('profile');
+router.get('/profile', ensureAuthenticated, function(req, res){
+	console.log('profile',req);
+	res.render('profile', {
+		login:req.user.login
+	});
 });
 
 //login page
@@ -83,6 +95,13 @@ router.get('/register', function(req, res){
 	res.render('register');
 });
 
+//register logout
+router.get('/logout', function(req, res){
+	//logout() remove the req.user property and clear the login session
+	req.logout();
+	req.flash('success_msg', 'Вы вышли из системы');
+	res.redirect('/users/login');
+});
 
 //register User
 router.post('/register', [
@@ -130,13 +149,20 @@ router.post('/register', [
 		"email": email,
 		"passwordmatch": passwordmatch
 	})
-	// нет проверки есть ли юзер в базе
-	User.createUser(newUser, function(err, user){
+	User.getUserByLogin(login, function(err, user){
 		if (err) throw err;
-		console.log('createUser', user);
+		if (!user) {
+			User.createUser(newUser, function(err, user){
+			if (err) throw err;
+				console.log('createUser', user);
+			});
+			req.flash('success_msg', 'Вы зарегистрированы и можете войти');
+			res.redirect('/users/login');
+		} else {
+			req.flash('error_msg', 'Пользователь с таким именем уже существует');
+			res.redirect('/users/register');
+		}
 	});
-	req.flash('success_msg', 'Вы зарегистрированы и можете войти');
-	res.redirect('/users/login');
     }
 });
 
@@ -173,12 +199,12 @@ passport.deserializeUser(function(id, done) {
 
 router.post('/login',
   passport.authenticate('local', {
-  	successRedirect: '/',
+  	successRedirect: '/users/profile',
   	failureRedirect:'/users/login',
   	failureFlash: true 
   }),
   function(req, res) {
-    res.redirect('/');
+    res.redirect('users/profile');
   });
 
 module.exports = router;

@@ -95,8 +95,8 @@ const db = mongoose.connection;
 
 const cors = require('cors');
 
-let routes = require('./routes/index');
-let users = require('./routes/users');
+const routes = require('./routes/index');
+const users = require('./routes/users');
 
 //The default dbpath for mongodb in Ubuntu is /var/lib/mongodb 
 //ключевым классом для работы с MongoDB является класс MongoClient
@@ -190,14 +190,14 @@ app.use(session({
  //  },
  //  // store: 
   secret: 'keyboard cat', 
-  saveUninitialized: false,//true,
-  resave: false, //true,
-  cookie: {
-    //path: '/', 
-    //httpOnly: true, 
-    //secure: false, 
-    maxAge: 60000 //null 
-  }
+  saveUninitialized: true,
+  resave: true
+  // cookie: {
+  //   // path: '/', 
+  //   // httpOnly: true, 
+  //   // secure: false, 
+  //   maxAge: 60000 //null 
+  // }
 }));
 
 //passport init
@@ -226,10 +226,11 @@ app.use(function (req, res, next){
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
   next();
 });
 
-
+//Routes
 app.use('/', routes);
 app.use('/users', users);
 
