@@ -62,6 +62,8 @@ function ensureAuthenticated(req, res, next){
 		res.redirect('/users/login');
 	}
 }
+
+
 //---------------------------------------------------------------------------
 const express = require('express');
 const router = express.Router();
@@ -110,7 +112,7 @@ router.post('/register', [
 	  .not().isEmpty()
 	  .trim()
 	  .escape()
-	  .isLength({ min: 3, max: 10}),
+	  .isLength({ min: 2, max: 10}),
 	body('userPassword')
 	  .not().isEmpty()
 	  .trim()
@@ -128,13 +130,13 @@ router.post('/register', [
 		// Finds the validation errors in this request and wraps them in an object with handy functions
 		const errors = validationResult(req);
 		let equal = checkEquals(req.body.userPassword, req.body.userPasswordMatch); 
-	if (!errors.isEmpty()) {
+	if(!errors.isEmpty()) {
 		console.log('equal', equal);
 		console.log('error', JSON.stringify({ errors: errors.array()}));
 		// return res.status(422).json({ errors: errors.array() });
 		return res.json({registration: false, text: "Ошибка ввода данных"});
 	} else if (!equal) {
-		return res.json({registration: false, text: "Введенный пароль не совпадает"});
+		return res.json({registration: false, text: "Введенныe пароль не совпадает"});
 	} else {
 	//create user for db, use Mongoose
 	let login = req.body.userLogin;
@@ -147,16 +149,28 @@ router.post('/register', [
 		"password": password,
 		"email": email,
 		"passwordmatch": passwordmatch
-	})
+	});
+
+	
 	User.getUserByLogin(login, function(err, user){
 		if (err) throw err;
 		if (!user) {
-			User.createUser(newUser, function(err, user){
-			if (err) throw err;
-				console.log('createUser', user);
+		//check email
+			User.getUserByEmail(email, function(err, user) {
+				if (err) throw err;
+				if (user) {
+					req.flash('error_msg', 'Введите другую почту. Пользователь с такой почтой есть в базе');
+					res.redirect('/users/register');
+				} else {
+					//create user
+					User.createUser(newUser, function(err, user){
+					if (err) throw err;
+						console.log('createUser', user);
+					});
+					req.flash('success_msg', 'Вы зарегистрированы и можете войти');
+					res.redirect('/users/login');
+				}
 			});
-			req.flash('success_msg', 'Вы зарегистрированы и можете войти');
-			res.redirect('/users/login');
 		} else {
 			req.flash('error_msg', 'Пользователь с таким именем уже существует');
 			res.redirect('/users/register');

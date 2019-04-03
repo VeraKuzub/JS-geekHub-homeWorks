@@ -2,17 +2,20 @@ function removeSlash (str){
 	return str.replace(/[\/\\]/g,'');
 }
 
+
 //matches all HTML tags pairs including attributes in the tags
 function removeHTMLtag(str) {
 	return str.replace(/<(.|\n)*?>/g, '');
 }
 
- //remove spaces at the beginning and the end
- function removeSpaces (el) {
- 	let str =  el.replace(/^\s+/, "");
+
+//remove spaces at the beginning and the end
+function removeSpaces (el) {
+	let str =  el.replace(/^\s+/, "");
 	str = str.replace(/\s+$/, "");
 	return str;
  }
+
 
 function checkInput (el) {
 	let str = removeSpaces(el);
@@ -20,6 +23,7 @@ function checkInput (el) {
 	str = removeHTMLtag(str);
 	return (str.length === 0) ? false: str;
 }
+
 
 function checkEmail(el){
 	let regExp = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
@@ -33,10 +37,16 @@ function checkPhone(el){
 	return regExp.test(el);
 }
 
-function checkLeng (el) {
-	if (el !== false) {
-		return (el.length < 5) ? true : false;
-	}
+
+function isValidPassword(passw) {
+    return /^[A-Za-z0-9]{6,}$/i.test(passw);
+};
+
+
+function checkLeng (el, length) {
+	if (el !== '') {
+		return (el.length >= length) ? true : false;
+	} return false;
 }
 
 
@@ -52,6 +62,7 @@ function registrationComplete() {
 	inputUserEmail.value = "";
 	inputUserPasswordMatch.value = "";
 }
+
 
 function registrationFailed () {
 	document.getElementsByTagName("h1")[0].innerHTML = "Oшибка регистарции";
@@ -72,9 +83,9 @@ btnAddNewUser.addEventListener("click", function(e) {
 
 	let allPrompts = "";
 	let pass = checkInput(inputUserPassword.value);
-	if (!checkInput(inputUserLogin.value)) allPrompts +="Введите имя пользователя <br>" ;
+	if (!checkInput(inputUserLogin.value) || !checkLeng(inputUserLogin.value, 2)) allPrompts +="Введите имя пользователя. Длина имени минимум 2 буквы<br>" ;
 	if (!pass) allPrompts +="Введите  пароль <br>" ;
-	if (checkLeng(pass)) allPrompts += "Пароль должен быть больше 6 символов<br>" ;
+	if (!isValidPassword(pass)) allPrompts += "Пароль должен быть больше 5 символов.<br>Можно использовать цифры и буквы латинского алфавита<br>" ;
 	if (!checkInput(inputUserEmail.value) || !checkEmail(inputUserEmail.value)) allPrompts +="Введите почту<br>";
 	if (!checkInput(inputUserPasswordMatch.value)) allPrompts +="Введите повторно пароль <br>";
 	if (!checkTwoPasswords(inputUserPassword.value, inputUserPasswordMatch.value)) allPrompts +="Введенные пароли не совпадают<br>";

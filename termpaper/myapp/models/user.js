@@ -47,6 +47,12 @@ module.exports.getUserByLogin = function (login, callback) {
   User.findOne(query, callback);
 }
 
+module.exports.getUserByEmail = function (email, callback) {
+  let query = {"email": email};
+  console.log(' getUserByEmail query', query);
+  User.findOne(query, callback);
+}
+
 module.exports.getUserById = function (id, callback) {
   User.findById(id, callback); //findById mongoose method
 }

@@ -12,7 +12,7 @@ function removeSpaces (el) {
 	let str =  el.replace(/^\s+/, "");
 	str = str.replace(/\s+$/, "");
 	return str;
-}
+ }
 
 function checkInput (el) {
 	let str = removeSpaces(el);
@@ -21,10 +21,10 @@ function checkInput (el) {
 	return (str.length === 0) ? false: str;
 }
 
-function checkLeng (el) {
-	if (el !== false) {
-		return (el.length < 5) ? true : false;
-	}
+function checkLeng (el, length) {
+	if (el !== '') {
+		return (el.length >= length) ? true : false;
+	} return false;
 }
 
 const btnDoLogin = document.getElementById("doLogin");
@@ -41,7 +41,7 @@ btnDoLogin.addEventListener("click", function(e) {
 	let pass = checkInput(inputUserPassword.value);
 	if (!checkInput(inputUserLogin.value)) allPrompts +="Введите имя пользователя <br>" ;
 	if (!pass) allPrompts +="Введите  пароль <br>" ;
-	if (checkLeng(pass)) allPrompts += "Пароль должен быть больше 6 символов<br>" ;
+	if (!checkLeng(pass, 5)) allPrompts += "Пароль должен быть больше 5 символов<br>" ;
 
 
 	if (allPrompts.length !== 0) {
