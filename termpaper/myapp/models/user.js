@@ -22,8 +22,28 @@ let UserSchema = new mongoose.Schema({
     required: true,
   },
   passwordmatch: {
-  type: String,
-  required: true,
+    type: String,
+    required: true,
+  },
+  username: {
+    type: String,
+    trim: true,
+  },
+  surname: {
+    type: String,
+    trim: true,
+  },
+  forename: {
+    type: String,
+    trim: true,
+  },
+  position: {
+    type: String,
+    trim: true,
+  },
+  phone: {
+    type: Number,
+    trim: true,
   }
 });
 
@@ -64,4 +84,10 @@ module.exports.comparePassword = function (candidatePassword, hash, callback) {
     console.log('isMatch',isMatch);
     callback(null, isMatch);
   });
+}
+
+
+module.exports.updateDate = function (login, callback) {
+   let query = {"login": login};
+
 }

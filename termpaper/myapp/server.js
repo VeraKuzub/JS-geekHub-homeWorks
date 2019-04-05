@@ -116,21 +116,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //Express Session 
 app.use(session({
- // genid: (req) => {
- //    // console.log('session','Inside the session middleware');
- //    // console.log('session req.sessionID',req.sessionID);
- //    return uuid() // use UUIDs for session IDs
- //  },
   store: new MongoStore({mongooseConnection: db}),
   secret: 'keyboard cat', 
   saveUninitialized: true,
-  resave: true
-  // cookie: {
-  //   // path: '/', 
-  //   // httpOnly: true, 
-  //   // secure: false, 
-  //   maxAge: 60000 //null 
-  // }
+  resave: false
 }));
 
 //passport init

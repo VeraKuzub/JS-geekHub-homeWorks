@@ -1,6 +1,6 @@
 <div class="container">
 	<p id = "containerPrompt" class="alert alert-danger"></p>
-	<h1 id="login" class="text-center">Логин</h1>
+	<h1 id="login" class="text-center">{{title}}</h1>
     <form id="loginForm" action="/users/login" method="post"> 
        <div class="form-group">
             <label for="userLogin">Логин</label>
@@ -8,7 +8,7 @@
         </div>
         <div class="form-group">
             <label for="userPassword">Пароль</label>
-            <input id="userPassword" class="form-control" name= "userPassword" type="password" placeholder="Введите пароль"  required>
+            <input id="userPassword" class="form-control" name="userPassword" type="password" placeholder="Введите пароль"  required>
         </div>  
       <button id="doLogin" class="btn btn-outline-success" type="submit">Войти</button>
     </form>

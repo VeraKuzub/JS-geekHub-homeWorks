@@ -68,6 +68,14 @@ function ensureAuthenticated(req, res, next){
 const express = require('express');
 const router = express.Router();
 
+const multer  = require('multer');
+const upload = multer({ 
+	storage: multer.diskStorage({
+	destination: (res, file, cb) => cb(null, 'uploads'),
+	filename:(res, file, cb) => cb(null, file.originalname)
+	})
+});
+
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -79,20 +87,23 @@ const User = require('../models/user');
 
 //profile page
 router.get('/profile', ensureAuthenticated, function(req, res){
-	console.log('profile',req);
+	let userPhoto = req.user.photo;
+	if (!userPhoto) userPhoto = "../img/bg.jpg";
 	res.render('profile', {
-		login:req.user.login
+		login:req.user.login,
+		photo: userPhoto
+		//добавляем все необходимые данные для отображения на страничке
 	});
 });
 
 //login page
 router.get('/login', function(req, res){
-	res.render('login');
+	res.render('login', {title: 'Войти в систему'});
 });
 
 //register page
 router.get('/register', function(req, res){
-	res.render('register');
+	res.render('register', {title: 'Регистрация'});
 });
 
 //register logout
@@ -215,9 +226,15 @@ router.post('/login',
 		successRedirect: '/users/profile',
 		failureRedirect:'/users/login',
 		failureFlash: true 
-	}),
-	function(req, res) {
-	res.redirect('users/profile');
+	})
+);
+
+router.post('/uploads', upload.single('photo'), function (req, res){
+	console.log('/uploads', req);
+	//меняем в базе в обьекте данных ссылку на фото  и отправляем от 
+	//сервера ответ новое фото
 });
 
 module.exports = router;
+
+//install multer, upload image in node js
