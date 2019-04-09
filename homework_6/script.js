@@ -75,7 +75,21 @@ class Character {
 			this.satiety, 
 			this.happiness, 
 			this.force, 
-			"You kill me");
+			"You killed me");
+
+			//added disabled 	
+			let container = document.getElementById(this.id);
+			let btns = container.getElementsByTagName('p')[2].getElementsByTagName('button');
+			let buttonSleep = btns[0];
+			let buttonFeed = btns[1];
+			let buttonWalk = btns[2];
+			let buttonPlay = btns[3];
+
+			buttonFeed.disabled = true;
+			buttonSleep.disabled = true;
+			buttonWalk.disabled = true;
+			buttonPlay.disabled = true;
+
 
 			setTimeout(function() {clearInterval(timerId);},0);
 
@@ -104,7 +118,7 @@ class Character {
 			"I'm hungry and weak. Feed me and I need to sleep.");
 			return true;
 			} 
-		}, 5000);
+		}, 1000);
 	}
 
 	toFeed () {
@@ -252,28 +266,31 @@ function addCharacter (id = 1, health = 100, satiety = 100, happiness= 100, forc
 		
 		//To remove event handlers, the function specified with the addEventListener() 
 		// method must be an external function
-		collbacktoSleep = () => obj.toSleep();
-		collbacktoFeed =()=> obj.toFeed();
-		collbacktoWalk =()=> obj.toWalk();
-		collbacktoPlay =()=> obj.toPlay();
+		callbacktoSleep = () => obj.toSleep();
+		callbacktoFeed =()=> obj.toFeed();
+		callbacktoWalk =()=> obj.toWalk();
+		callbacktoPlay =()=> obj.toPlay();
 
-		buttonSleep.addEventListener('click', collbacktoSleep);
-		buttonFeed.addEventListener('click', collbacktoFeed);
-		buttonWalk.addEventListener('click', collbacktoWalk);
-		buttonPlay.addEventListener('click', collbacktoPlay);
+		buttonSleep.addEventListener('click', callbacktoSleep);
+		buttonFeed.addEventListener('click', callbacktoFeed);
+		buttonWalk.addEventListener('click', callbacktoWalk);
+		buttonPlay.addEventListener('click', callbacktoPlay);
 
 
-		let timerId = setInterval( () => {
-			console.log(`${obj.name} health:`,obj.health);
-			if (obj.health === 0 || obj.satiety === 0 ) {
-			console.log('remove EventListener');
-			buttonSleep.removeEventListener('click', collbacktoSleep);
-			buttonFeed.removeEventListener('click', collbacktoFeed);
-			buttonWalk.removeEventListener('click', collbacktoWalk);
-			buttonPlay.removeEventListener('click', collbacktoPlay);
-			clearInterval(timerId);
-			}
-		}, 5000);
+		// //removeEventListener does not work
+		// let timerId = setInterval( () => {
+		// 	console.log(`${obj.name} health:`,obj.health);
+		// 	console.log( `${obj.name} timerId:`, timerId);
+		// 	if (obj.health === 0 || obj.satiety === 0 ) {
+		// 	clearInterval(timerId);
+		// 	console.log('remove EventListener');
+		// 	console.log('callbacktoSleep', callbacktoSleep);
+		// 	buttonSleep.removeEventListener('click', callbacktoSleep);
+		// 	buttonFeed.removeEventListener('click', callbacktoFeed);
+		// 	buttonWalk.removeEventListener('click', callbacktoWalk);
+		// 	buttonPlay.removeEventListener('click', callbacktoPlay);
+		// 	}
+		// }, 5000);
 
 		
 		
