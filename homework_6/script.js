@@ -265,12 +265,13 @@ function addCharacter (id = 1, health = 100, satiety = 100, happiness= 100, forc
 
 		let timerId = setInterval( () => {
 			console.log(`${obj.name} health:`,obj.health);
-			if (obj.health || obj.satiety ) {
+			if (obj.health === 0 || obj.satiety === 0 ) {
+			console.log('remove EventListener');
 			buttonSleep.removeEventListener('click', collbacktoSleep);
 			buttonFeed.removeEventListener('click', collbacktoFeed);
 			buttonWalk.removeEventListener('click', collbacktoWalk);
 			buttonPlay.removeEventListener('click', collbacktoPlay);
-			// clearInterval(timerId);
+			clearInterval(timerId);
 			}
 		}, 5000);
 
