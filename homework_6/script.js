@@ -15,173 +15,291 @@
 // Для кожного звірятка - “погодувати тамагочі”, “погратись”, “вкласти спати” і т.д.
 // можна виводити смайлики
 
+function writeText(name, health, satiety, happiness, force, help) {
+	let text = `Tamagochi name:${name}<br>
+	health:${health}<br> 
+	satiety:${satiety}<br> 
+	happiness:${happiness}<br> 
+	force:${force}<br>
+	${help}`;
+	return text;
+}
+
+
+function enterName () {
+	return prompt('Enter the Tamagotchi\'s name');
+}
+
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+function placeDiv(element, x_pos, y_pos ) {
+  element.style.position = "absolute";
+  element.style.left = x_pos+'px';
+  element.style.top = y_pos+'px';
+}
+
+
 class Character {
-	// Setup object
-
-	constructor (name, health, satiety, happiness, force) {
-
-	console.log ("character is being creating");
-
-    this.name = name;
-    this.health = health;
-    this.satiety = satiety;
-    this.happiness = happiness;
-    this.force = force;
+	constructor (name, id ,health, satiety, happiness, force) {
+		this.name = name;
+		this.health = health;
+		this.satiety = satiety;
+		this.happiness = happiness;
+		this.force = force;
+		this.id = '' + id;
 	}
 
-	toEat () {
-		this.health = this.health + 5;
-		document.getElementById("smiley").setAttribute("src", "./images/smailik17.png");
-		document.getElementById("demo").innerHTML =
-		`Tamagochi:name:${this.name}<br>
-		health:${this.health}<br> 
-		satiety:${this.satiety}<br> 
-		happiness:${this.happiness}<br> 
-		force:${this.force}`;
-		return this;
+
+	reductionOfEvidence() {
+		let container = document.getElementById(this.id);
+		let img = container.getElementsByTagName('p')[0].getElementsByTagName('img')[0];
+		let elementInfo = container.getElementsByTagName('p')[1];
+
+		let timerId = setInterval(() => {
+			this.health -= 5;
+			this.satiety -= 2;
+			this.happiness -= 3;
+			this.force -= 2;
+		if (this.happiness < 0) this.happiness = 0;
+		if (this.health <= 0 || this.satiety <= 0) {
+			if (this.health < 0) this.health = 0;
+			if (this.satiety < 0) this.satiety = 0;
+			img.setAttribute('src',"./images/smailik9.png");
+			elementInfo.innerHTML = writeText(
+			this.name, 
+			this.health, 
+			this.satiety, 
+			this.happiness, 
+			this.force, 
+			"You kill me");
+
+			setTimeout(function() {clearInterval(timerId);},0);
+
+			return false;
+
+		} 
+		if (this.health > 30 && this.satiety > 30) {
+			img.setAttribute('src',"./images/smailik17.png");
+			elementInfo.innerHTML = writeText(
+			this.name, 
+			this.health, 
+			this.satiety, 
+			this.happiness, 
+			this.force, 
+			"I feel good. Play with me");	
+			return true;
+		} 
+		if (this.health < 30  &&  this.satiety > 0 ||  this.satiety < 30 && this.health > 0) {
+			img.setAttribute('src',"./images/smailik12.png");
+			elementInfo.innerHTML = writeText(
+			this.name, 
+			this.health, 
+			this.satiety, 
+			this.happiness, 
+			this.force, 
+			"I'm hungry and weak. Feed me and I need to sleep.");
+			return true;
+			} 
+		}, 5000);
 	}
 
-	toPlay () {
-		this.happiness = this.happiness + 10;
-		this.force = this.force + 5;
-		document.getElementById("smiley").setAttribute("src", "./images/smailik2.png");
-		document.getElementById("demo").innerHTML =
-		`Tamagochi:name:${this.name}<br>
-		health:${this.health}<br> 
-		satiety:${this.satiety}<br> 
-		happiness:${this.happiness}<br> 
-		force:${this.force}`;
-		return this;
+	toFeed () {
+		this.health += 2;
+		this.satiety += 10;
+		this.happiness += 1;
+		this.force += 2;
+
+		let container = document.getElementById(this.id);
+		let img = container.getElementsByTagName('p')[0].getElementsByTagName('img')[0];
+		let elementInfo = container.getElementsByTagName('p')[1];
+		img.setAttribute('src',"./images/smailik17.png");
+		elementInfo.innerHTML = writeText(
+			this.name, 
+			this.health, 
+			this.satiety, 
+			this.happiness, 
+			this.force, 
+			"thanks for feeding"
+		);
+	}
+
+
+	toSleep () {
+		this.happiness = this.happiness + 5;
+		this.health = this.health + 10;
+
+		let container = document.getElementById(this.id);
+		let img = container.getElementsByTagName('p')[0].getElementsByTagName('img')[0];
+		let elementInfo = container.getElementsByTagName('p')[1];
+		img.setAttribute("src", "./images/smailik2.png");
+		elementInfo.innerHTML = writeText(
+			this.name, 
+			this.health, 
+			this.satiety, 
+			this.happiness, 
+			this.force, 
+			"thanks for sleeping"
+		);
 	}
 
 	toWalk () {
 		this.happiness = this.happiness + 5;
 		this.force = this.force + 10;
 		this.health =  this.health+ 10;
-		document.getElementById("smiley").setAttribute("src", "./images/smailik1.png");
-		document.getElementById("demo").innerHTML =
-		`Tamagochi:name:${this.name}<br>
-		health:${this.health}<br> 
-		satiety:${this.satiety}<br> 
-		happiness:${this.happiness}<br> 
-		force:${this.force}`;
-		return this;
+
+		let container = document.getElementById(this.id);
+		let img = container.getElementsByTagName('p')[0].getElementsByTagName('img')[0];
+		let elementInfo = container.getElementsByTagName('p')[1];
+
+		img.setAttribute("src", "./images/smailik1.png");
+		elementInfo.innerHTML = writeText(
+			this.name, 
+			this.health, 
+			this.satiety, 
+			this.happiness, 
+			this.force, 
+			"It was a nice walk"
+		);
 	}
 
-	toSleep () {
-		this.happiness = this.happiness + 5;
-		this.health = this.health + 20;
-		document.getElementById("smiley").setAttribute("src", "./images/smailik2.png");
-		document.getElementById("demo").innerHTML =
-		`Tamagochi:name:${this.name}<br>
-		health:${this.health}<br> 
-		satiety:${this.satiety}<br> 
-		happiness:${this.happiness}<br> 
-		force:${this.force}`;
-		return this;
-	}
+	toPlay () {
+		this.happiness = this.happiness + 3;
+		this.force = this.force + 5;
 
-	toTreat () {
-		this.health = this.health + 10;
-    	this.satiety = this.satiety + 20;
-    	document.getElementById("smiley").setAttribute("src", "./images/smailik1.png");
-    	document.getElementById("demo").innerHTML =
-		`Tamagochi:name:${this.name}<br>
-		health:${this.health}<br> 
-		satiety:${this.satiety}<br> 
-		happiness:${this.happiness}<br> 
-		force:${this.force}`;
-		return this;
-	}
-
-	toJump () {
-		this.health = this.health + 5;
-    	this.force = this.force + 15;
-    	document.getElementById("smiley").setAttribute("src", "./images/smailik4.png");
-    	document.getElementById("demo").innerHTML =
-		`Tamagochi:name:${this.name}<br>
-		health:${this.health}<br> 
-		satiety:${this.satiety}<br> 
-		happiness:${this.happiness}<br> 
-		force:${this.force}`;
-		return this;
-	}
-
-	toFly () {
-		this.health = this.health + 5;
-    	this.force = this.force + 25;
-    	this.happiness = this.happiness + 5;
-    	document.getElementById("smiley").setAttribute("src", "./images/smailik17.png");
-    	document.getElementById("demo").innerHTML =
-		`Tamagochi:name:${this.name}<br>
-		health:${this.health}<br> 
-		satiety:${this.satiety}<br> 
-		happiness:${this.happiness}<br> 
-		force:${this.force}`;
-		return this;
+		let container = document.getElementById(this.id);
+		let img = container.getElementsByTagName('p')[0].getElementsByTagName('img')[0];
+		let elementInfo = container.getElementsByTagName('p')[1];
+		img.setAttribute("src", "./images/smailik1.png");
+		elementInfo.innerHTML = writeText(
+			this.name, 
+			this.health, 
+			this.satiety, 
+			this.happiness, 
+			this.force, 
+			"thanks for playing"
+		);
 	}
 }
 
-function addTamatchi () { 
-	let obj = new Character("Kate", 10, 10, 10, 10);
-	document.getElementById("demo").innerHTML =
-	`Tamagochi name:${obj.name}<br>
-	health:${obj.health}<br> 
-	satiety:${obj.satiety}<br> 
-	happiness:${obj.happiness}<br> 
-	force:${obj.force}`;
-	let elem = document.createElement("img");
-	elem.setAttribute("id","smiley");
-	elem.setAttribute("width","300");
-	elem.setAttribute("hight","212");
-	elem.setAttribute("alt","smiley");
-	elem.setAttribute("src", "./images/smailik12.png");
-	document.body.appendChild(elem);
-	return obj;
-};
 
 
-function reductionOfEvidence (obj) {
-	obj.health -= 5;
-	obj.satiety -= 2;
-	obj.happiness -= 5;
-	if (obj.health <= 0 || obj.satiety <= 0) {
-		document.getElementById("demo").innerHTML = 
+function addCharacter (id = 1, health = 100, satiety = 100, happiness= 100, force = 100) {
+	let name = enterName ();
+	if (name === null || name === '') {
+		document.getElementById("help").innerText = 'To create a character you need to enter a name';
+	} else {
+		document.getElementById("help").innerText =`You created Tamagotchi with the name ${name}`;
+		
+		let obj = new Character(name, id, health, satiety, happiness, force);
+
+
+		let containerCharacter = document.createElement('div');
+		let elementInfo = document.createElement('p');
+		elementInfo.innerHTML = 
 		`Tamagochi name:${obj.name}<br>
 		health:${obj.health}<br> 
 		satiety:${obj.satiety}<br> 
 		happiness:${obj.happiness}<br> 
-		force:${obj.force}`; 
-		console.log('health',obj.health);
-		console.log('satiety',obj.satiety);
-		document.getElementById("help").innerHTML = "You kill me";
-		document.getElementById("smiley").setAttribute("src", "./images/smailik9.png");
-		setTimeout(function() { clearInterval(timerId);},0);
-		return obj; 
-		}
-	if (obj.health > 30 || obj.satiety > 30) document.getElementById("help").innerHTML = ""; 
-	if (obj.health < 30 &&  obj.satiety > 0 ||  obj.satiety < 30 && obj.health > 0) {
-		document.getElementById("help").innerHTML = "I'm hungry and weak. Feed me and I need to sleep."; }
-		document.getElementById("demo").innerHTML = 
-		`Tamagochi name:${obj.name}<br>
-		health:${obj.health}<br> 
-		satiety:${obj.satiety}<br> 
-		happiness:${obj.happiness}<br> 
-		force:${obj.force}`; 
-			console.log('health',obj.health);
-			console.log('satiety',obj.satiety);
-		return obj;
+		force:${obj.force}`;
+
+		let elementForImg = document.createElement('p');
+		let elementForBtn = document.createElement('p');
+
+		let img = document.createElement('img');
+		img.setAttribute("class","imgCharacter");
+		img.setAttribute("alt", name);
+		img.setAttribute("src", "./images/smailik12.png");
+
+
+		let buttonFeed = document.createElement('button');
+		buttonFeed.setAttribute('type', 'button');
+		buttonFeed.setAttribute('name', 'feed');
+		buttonFeed.setAttribute('class', 'button medium green');
+		buttonFeed.innerText = 'Feed';
+		let buttonSleep = document.createElement('button');
+		buttonSleep.setAttribute('type', 'button');
+		buttonSleep.setAttribute('name', 'sleep');
+		buttonSleep.setAttribute('class', 'button medium green');
+		buttonSleep.innerText = 'Sleep';
+
+		let buttonWalk = document.createElement('button');
+		buttonWalk.setAttribute('type', 'button');
+		buttonWalk.setAttribute('name', 'walk');
+		buttonWalk.setAttribute('class', 'button medium green');
+		buttonWalk.innerText = 'Walk';
+
+		let buttonPlay = document.createElement('button');
+		buttonPlay.setAttribute('type', 'button');
+		buttonPlay.setAttribute('name', 'play');
+		buttonPlay.setAttribute('class', 'button medium green');
+		buttonPlay.innerText = 'Play';
+
+
+		elementForBtn.appendChild(buttonFeed);
+		elementForBtn.appendChild(buttonSleep);
+		elementForBtn.appendChild(buttonWalk);
+		elementForBtn.appendChild(buttonPlay);
+		elementForImg.appendChild(img);
+
+		
+		containerCharacter.appendChild(elementForImg);
+		containerCharacter.appendChild(elementInfo);
+		containerCharacter.appendChild(elementForBtn);
+		
+		//To remove event handlers, the function specified with the addEventListener() 
+		// method must be an external function
+		collbacktoSleep = () => obj.toSleep();
+		collbacktoFeed =()=> obj.toFeed();
+		collbacktoWalk =()=> obj.toWalk();
+		collbacktoPlay =()=> obj.toPlay();
+
+		buttonSleep.addEventListener('click', collbacktoSleep);
+		buttonFeed.addEventListener('click', collbacktoFeed);
+		buttonWalk.addEventListener('click', collbacktoWalk);
+		buttonPlay.addEventListener('click', collbacktoPlay);
+
+
+		let timerId = setInterval( () => {
+			console.log(`${obj.name} health:`,obj.health);
+			if (obj.health || obj.satiety ) {
+			buttonSleep.removeEventListener('click', collbacktoSleep);
+			buttonFeed.removeEventListener('click', collbacktoFeed);
+			buttonWalk.removeEventListener('click', collbacktoWalk);
+			buttonPlay.removeEventListener('click', collbacktoPlay);
+			// clearInterval(timerId);
+			}
+		}, 5000);
+
+		
+		
+		containerCharacter.setAttribute('class', 'container');
+		containerCharacter.setAttribute('id', obj.id);
+
+
+		document.body.appendChild(containerCharacter);
+
+		obj.reductionOfEvidence();
+
+	// place tamagochi in different coordinates
+		placeDiv(containerCharacter, getRandomInt(0, 1000), getRandomInt(0, 1000));
+	}
 }
 
 
-let tamagotchi;
-let timerId;
-let timeForSetInterval = 3000;
+//-------------------------------------------------------
 
+// global id for everyone characher
+let idForCharacter = 1;
 
-document.getElementById("btnAddTamagotchi").addEventListener("click", function () { tamagotchi = addTamatchi (tamagotchi)});
-document.getElementById("btnAddTamagotchi").addEventListener("click", function () {return timerId = setInterval(function () { reductionOfEvidence (tamagotchi); }, timeForSetInterval);
+document.getElementById("btnAddTamagotchi").addEventListener("click", function () { 
+	addCharacter(idForCharacter);
+	idForCharacter++;
 });
+
 
 
 

@@ -6,13 +6,17 @@ body {
   font-weight: bold;
 }
 
-.conteiner {
+.container {
   width: 300px;
   margin: 0 auto;
 }
 
+.imgCharacter {
+  width: 100%;
+}
+
 p {
-  padding: 30px;
+  padding: 10px;
 }
 
 
@@ -21,7 +25,7 @@ p {
   padding: 0;
 }
 
-.button{
+.button {
   display: inline-block;
   *display: inline;
   zoom: 1;
@@ -93,17 +97,22 @@ p {
   text-shadow: none !important;
 }
 
+.button.medium {
+  padding: 10px 15px;
+  text-transform: uppercase;
+}
+
 .button.large {
   margin: 0 50px;
   padding: 12px 30px;
   text-transform: uppercase;
 }
 
-.button.large:active{
+.button.large:active {
   top: 2px;
 }
 
-.button.green{
+.button.green {
   background-color: #57a957;
   border-color: #57a957;
 }
@@ -115,3 +124,4 @@ p {
 .button.green:active{
   background: #57a957;
 }
+
