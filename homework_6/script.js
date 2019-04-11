@@ -266,10 +266,10 @@ function addCharacter (id = 1, health = 100, satiety = 100, happiness= 100, forc
 		
 		//To remove event handlers, the function specified with the addEventListener() 
 		// method must be an external function
-		callbacktoSleep = () => obj.toSleep();
-		callbacktoFeed =()=> obj.toFeed();
-		callbacktoWalk =()=> obj.toWalk();
-		callbacktoPlay =()=> obj.toPlay();
+		let callbacktoSleep = () => obj.toSleep();
+		let callbacktoFeed =()=> obj.toFeed();
+		let callbacktoWalk =()=> obj.toWalk();
+		let callbacktoPlay =()=> obj.toPlay();
 
 		buttonSleep.addEventListener('click', callbacktoSleep);
 		buttonFeed.addEventListener('click', callbacktoFeed);
@@ -277,20 +277,20 @@ function addCharacter (id = 1, health = 100, satiety = 100, happiness= 100, forc
 		buttonPlay.addEventListener('click', callbacktoPlay);
 
 
-		// //removeEventListener does not work
-		// let timerId = setInterval( () => {
-		// 	console.log(`${obj.name} health:`,obj.health);
-		// 	console.log( `${obj.name} timerId:`, timerId);
-		// 	if (obj.health === 0 || obj.satiety === 0 ) {
-		// 	clearInterval(timerId);
-		// 	console.log('remove EventListener');
-		// 	console.log('callbacktoSleep', callbacktoSleep);
-		// 	buttonSleep.removeEventListener('click', callbacktoSleep);
-		// 	buttonFeed.removeEventListener('click', callbacktoFeed);
-		// 	buttonWalk.removeEventListener('click', callbacktoWalk);
-		// 	buttonPlay.removeEventListener('click', callbacktoPlay);
-		// 	}
-		// }, 5000);
+		//removeEventListener does not work
+		let timerId = setInterval( () => {
+			console.log(`${obj.name} health:`,obj.health);
+			console.log( `${obj.name} timerId:`, timerId);
+			if (obj.health === 0 || obj.satiety === 0 ) {
+			clearInterval(timerId);
+			console.log('remove EventListener');
+			console.log('callbacktoSleep', callbacktoSleep);
+			buttonSleep.removeEventListener('click', callbacktoSleep);
+			buttonFeed.removeEventListener('click', callbacktoFeed);
+			buttonWalk.removeEventListener('click', callbacktoWalk);
+			buttonPlay.removeEventListener('click', callbacktoPlay);
+			}
+		}, 5000);
 
 		
 		
